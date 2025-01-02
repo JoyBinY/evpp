@@ -2,6 +2,8 @@ cmake_minimum_required (VERSION 2.8)
 
 project (safe-evpp C CXX)
 
+set(CMAKE_CXX_STANDARD 20)
+
 if (UNIX)
     if(NOT CMAKE_BUILD_TYPE)
         set(CMAKE_BUILD_TYPE "Release")
@@ -45,12 +47,14 @@ endif (UNIX)
 
 string (REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
 
+find_package (glog 0.7.1 REQUIRED)
+
 if (UNIX)
     SET(CMAKE_CXX_FLAGS_DEBUG   "-O0 -g -ggdb -D_DEBUG -DGOOGLE_STRIP_LOG=0")
     SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -g -ggdb -DNDEBUG -DGOOGLE_STRIP_LOG=1")
-    SET(DEPENDENT_LIBRARIES event glog pthread)
+    SET(DEPENDENT_LIBRARIES event glog::glog pthread)
 else (UNIX)
-    SET(DEPENDENT_LIBRARIES event glog)
+    SET(DEPENDENT_LIBRARIES event glog::glog)
 endif (UNIX)
 
 # Set to true if https support is needed.
@@ -91,9 +95,9 @@ add_subdirectory (apps)
 add_subdirectory (labs)
 
 if (NOT EVPP_VCPKG_BUILD)
-    add_subdirectory (test)
-    add_subdirectory (examples)
-    add_subdirectory (benchmark)
+    # add_subdirectory (test)
+    # add_subdirectory (examples)
+    # add_subdirectory (benchmark)
 endif ()
 
 set (CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake")

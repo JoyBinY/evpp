@@ -33,8 +33,8 @@ if (UNIX)
     # boost lockfree queue
     add_library(evpp_boost SHARED ${evpp_SRCS})
     add_library(evpp_boost_static STATIC ${evpp_SRCS})
-    target_compile_definitions(evpp_boost PRIVATE -DH_HAVE_BOOST=1)
-    target_compile_definitions(evpp_boost_static PRIVATE -DH_HAVE_BOOST=1)
+    target_compile_definitions(evpp_boost PRIVATE)
+    target_compile_definitions(evpp_boost_static PRIVATE)
     target_link_libraries(evpp_boost        ${DEPENDENT_LIBRARIES})
     target_link_libraries(evpp_boost_static ${DEPENDENT_LIBRARIES})
 
